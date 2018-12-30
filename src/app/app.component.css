@@ -1,0 +1,23 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-auto-rows:minmax(100px, auto); */
+}
+
+#titelbalk{
+  grid-column: 1/5;
+}
+
+#plattegrond{
+  grid-column: 1/4;
+}
+
+#sidebar{
+  grid-column: 4;
+}
+
+.container > div{
+  background:#eee;
+  padding:1em;
+  border:1px solid black;
+}

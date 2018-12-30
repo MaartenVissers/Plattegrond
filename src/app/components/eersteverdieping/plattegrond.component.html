@@ -1,0 +1,27 @@
+
+
+<!--  <div id="boven">REFTER</div>
+  <div>GR101</div>
+
+  <div id="linkseGang">GANG</div>
+  <div id="midden">MIDDEN</div>
+
+  <div id="rechtseGang">GANG</div>
+  <div>GR112</div>
+
+  <div>GR102</div>
+  <div>GR111</div>
+  <div>GR103</div>
+  <div>GR110</div>
+  <div>GR104</div>
+  <div>GR109</div>
+  <div>GR105</div>
+  <div>GR108</div>
+  <div id="linksOnderLokaal">GR106</div>
+  <div id="rechtsOnderLokaal">GR107</div>-->
+  <button *ngFor="let verdieping of verdiepingSet" (click)="setVerdieping(verdieping)">{{verdieping.name}}</button>
+<div class="wrapper" >
+  <div *ngFor="let ruimte of ruimtesSet;" (click)="onClick(ruimte)" id="{{ruimte.cssId}}">{{ruimte.name}}</div>
+
+
+</div>
