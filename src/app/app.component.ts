@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Verdieping} from './model/verdieping';
 import { DataService} from './services/data.service';
 import {ComponentService} from './services/component.service';
-import {PlattegrondComponent} from './components/eersteverdieping/plattegrond.component';
+import {PlattegrondComponent} from './components/plattegrond/plattegrond.component';
 
 
 @Component({

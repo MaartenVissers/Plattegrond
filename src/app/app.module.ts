@@ -4,20 +4,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DataService } from './services/data.service';
-import { PlattegrondComponent } from './components/eersteverdieping/plattegrond.component';
+import { PlattegrondComponent } from './components/plattegrond/plattegrond.component';
 
 import { InMemoryDataService } from './services/in-memory-data.service';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { RuimteComponent } from './components/ruimte/ruimte.component';
-import { TweedeverdiepingComponent } from './components/tweedeverdieping/tweedeverdieping.component';
 import {FormsModule} from '@angular/forms';
+import { AppRoutingModule} from './app-routing.module';
+import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlattegrondComponent,
     RuimteComponent,
-    TweedeverdiepingComponent
+    RuimtedetailsComponent
   ],
   imports: [
     BrowserModule,
