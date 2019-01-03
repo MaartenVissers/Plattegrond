@@ -13,6 +13,7 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule} from './app-routing.module';
 import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails.component';
 import {RouterModule, Routes} from '@angular/router';
+import { SettingspaneelComponent } from './components/settingspaneel/settingspaneel.component';
 
 const routes: Routes = [
   {
@@ -21,11 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'plattegrond',
-    component: PlattegrondComponent
+    component: PlattegrondComponent,
+    children: [ {
+      path: 'ruimtedetails/:id',
+      component: RuimtedetailsComponent
+    }]
   }
   ,
   {
-    path: 'ruimtedetails',
+    path: 'ruimtedetails/:id',
     component: RuimtedetailsComponent
   }
 ];
@@ -35,7 +40,8 @@ const routes: Routes = [
     AppComponent,
     PlattegrondComponent,
     RuimteComponent,
-    RuimtedetailsComponent
+    RuimtedetailsComponent,
+    SettingspaneelComponent
   ],
   imports: [
     RouterModule.forRoot(

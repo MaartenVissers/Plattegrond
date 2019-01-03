@@ -1,2 +1,24 @@
-<button (click)="show()">show</button>
-<router-outlet></router-outlet>
+<h1>{{ruimte.name}}</h1>
+<form>
+  <div>
+    <label for="name"><b>name: </b></label>
+    <input id="name" [(ngModel)]="ruimte.name"  name="name">
+  </div>
+  <div>
+    <label for="type"><b>Type: </b></label>
+    <input id="type" [(ngModel)]="ruimte.type"  name="ruimte.type">
+  </div>
+  <div>
+    <label for="capaciteit"><b>Capaciteit: </b></label>
+    <input id="capaciteit" value="{{ruimte.capaciteit}}">
+  </div>
+</form>
+<p *ngIf="ruimte.beamer"><b>Beamer:</b> ja</p>
+<p *ngIf="!ruimte.beamer"><b>Beamer:</b> nee</p>
+<p *ngIf="ruimte.bezet"><b>Bezet:</b> <span style="color:red"> ja</span></p>
+<p *ngIf="!ruimte.bezet"><b>Bezet:</b> <span style="color:green"> nee</span></p>
+<p *ngIf="ruimte.drukte"><b>Drukte:</b> {{ruimte.drukte}}</p>
+<p *ngIf="ruimte.gereserveerd"><b>Gereserveerd tot:</b> {{ruimte.eindDatumReservatie.toLocaleString()}}</p>
+
+<a routerLink=""><button>TERUG NAAR HET OVERZICHT</button></a>
+

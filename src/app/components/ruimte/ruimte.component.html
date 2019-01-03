@@ -1,21 +1,22 @@
 <div (click)="onClick()">
-  <p>{{ruimte.name}}</p>
+  <p *ngIf="settings.name">{{ruimte.name}}</p>
 
-  <p class="fa fa-video" *ngIf="ruimte.beamer=='true'"></p>
-  <!--info circle-->
+  <p class="fa fa-video" *ngIf="ruimte.beamer && settings.beamer"></p>
+
+
   <p style="display:flex; justify-content:flex-end; align-content: flex-end;"
-     *ngIf="ruimte.capaciteit">{{ruimte.capaciteit}} <span class="fa fa-male"></span></p>
+     *ngIf="ruimte.capaciteit && settings.capaciteit">{{ruimte.capaciteit}} <span class="fa fa-male"></span></p>
   <p style="display:flex; justify-content:flex-end; align-content: flex-end;"
-     *ngIf="ruimte.drukte >= 0">{{ruimte.drukte}} <span class="fa fa-child"></span></p>
+     *ngIf="settings.bezet && ruimte.drukte >= 0">{{ruimte.drukte}} <span class="fa fa-child"></span></p>
 
 </div>
-<div *ngIf="!isCollapsed">
+<div *ngIf="(ruimte == geselecteerdeRuimte)">
 
-  <input *ngIf="ruimte.drukte  >= 0" type="range" name="drukte" id="drukteSlider" [(ngModel)]="ruimte.drukte" min="0"
+  <input *ngIf="(ruimte.drukte  >= 0)" type="range" name="drukte" id="drukteSlider" [(ngModel)]="ruimte.drukte" min="0"
          max="100"/>
   <br>
 
-  <div *ngIf="!ruimte.gereserveerd && (ruimte.type == 'vergaderzaal' || ruimte.type == 'aula' || ruimte.type == 'klaslokaal')">
+  <div *ngIf="!ruimte.bezet && !ruimte.gereserveerd && (ruimte.type == 'vergaderzaal' || ruimte.type == 'aula' || ruimte.type == 'klaslokaal')">
 
     <h3>Reserveer het lokaal: </h3>
     <select [(ngModel)]="selectedOption">
@@ -31,7 +32,7 @@
     Gereserveerd tot {{ruimte.eindDatumReservatie.toLocaleString()}}
   </div>
 
-  <a [routerLink]="['ruimtedetails']" (click)="infoClick()" class="fa fa-info-circle">
+  <a [routerLink]="['ruimtedetails/', ruimte.id]" (click)="infoClick()" class="fa fa-info-circle">
 
 
   </a>

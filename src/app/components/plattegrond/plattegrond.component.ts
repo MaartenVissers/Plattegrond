@@ -4,6 +4,8 @@ import {Ruimte} from '../../model/ruimte';
 import {ComponentService} from '../../services/component.service';
 import {Verdieping} from '../../model/verdieping';
 import {RuimteService} from '../../services/ruimte.service';
+import {Settings} from '../../model/settings';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-plattegrond',
@@ -17,9 +19,9 @@ export class PlattegrondComponent implements OnInit {
   isView: boolean;
   toggleButtonText: string;
   verdieping: Verdieping;
-  isCollapsed: boolean;
+  settings: Settings;
 
-  constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService) {
+  constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService, private settingsService: SettingsService) {
     this.cssClass = 'wrapper';
     this.isView = true;
     this.toggleButtonText = 'Lijst Weergave';
@@ -33,6 +35,8 @@ export class PlattegrondComponent implements OnInit {
         this.ruimtesSet = verdiepingen[0].ruimtes;
       }
     );
+
+    this.settingsService.currentSettings.subscribe(settings => this.settings = settings);
   }
 
   setVerdieping(verdieping) {

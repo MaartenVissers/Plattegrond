@@ -1,0 +1,7 @@
+<form action="/action_page.php">
+  <input type="checkbox" name="name" [(ngModel)]="settings.name" (change)="seeNaam(settings.name?'checked':'unchecked')" value="naam" checked>Naam<br>
+  <input type="checkbox" name="type" [(ngModel)]="settings.type" (change)="seeType(settings.type?'checked':'unchecked')" value="type" checked>Type<br>
+  <input type="checkbox" name="bezet" [(ngModel)]="settings.bezet" (change)="seeBezet(settings.bezet?'checked':'unchecked')" value="bezet" checked>Bezet/Drukte<br>
+  <input type="checkbox" name="beamer" [(ngModel)]="settings.beamer" (change)="seeBeamer(settings.beamer?'checked':'unchecked')" value="beamer">Beamer<br>
+  <input type="checkbox" name="capaciteit" [(ngModel)]="settings.capaciteit" (change)="seeCapaciteit(settings.capaciteit?'checked':'unchecked')" value="capaciteit">Capaciteit<br>
+</form>

@@ -6,6 +6,6 @@
 
 <div class="{{cssClass}}">
 
- <app-ruimte id="{{ruimte.cssId}}" [ngStyle]="{background: {true:'red',false:''}[ruimte.bezet]}" *ngFor="let ruimte of ruimtesSet"
+ <app-ruimte id="{{ruimte.cssId}}" [ngStyle]="{background: {true:'red',false:''}[ruimte.bezet && settings.bezet]}" *ngFor="let ruimte of ruimtesSet"
                     [ruimte]="ruimte"></app-ruimte>
 </div>
