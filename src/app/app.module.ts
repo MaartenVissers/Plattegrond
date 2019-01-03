@@ -12,6 +12,23 @@ import { RuimteComponent } from './components/ruimte/ruimte.component';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule} from './app-routing.module';
 import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: PlattegrondComponent
+  },
+  {
+    path: 'plattegrond',
+    component: PlattegrondComponent
+  }
+  ,
+  {
+    path: 'ruimtedetails',
+    component: RuimtedetailsComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -21,6 +38,10 @@ import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails
     RuimtedetailsComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: false }
+    ),
     BrowserModule,
     HttpClientModule,
     FormsModule,

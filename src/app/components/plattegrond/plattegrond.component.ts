@@ -3,6 +3,7 @@ import { DataService} from '../../services/data.service';
 import {Ruimte} from '../../model/ruimte';
 import {ComponentService} from '../../services/component.service';
 import {Verdieping} from '../../model/verdieping';
+import {RuimteService} from '../../services/ruimte.service';
 
 @Component({
   selector: 'app-plattegrond',
@@ -15,8 +16,10 @@ export class PlattegrondComponent implements OnInit {
   cssClass: string;
   isView: boolean;
   toggleButtonText: string;
+  verdieping: Verdieping;
+  isCollapsed: boolean;
 
-  constructor(private dataService: DataService, private componentService: ComponentService) {
+  constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService) {
     this.cssClass = 'wrapper';
     this.isView = true;
     this.toggleButtonText = 'Lijst Weergave';
@@ -33,7 +36,11 @@ export class PlattegrondComponent implements OnInit {
   }
 
   setVerdieping(verdieping) {
+    console.log(verdieping);
+    this.ruimteService.changeVerdieping(verdieping);
+    this.verdieping = verdieping;
       this.ruimtesSet = verdieping.ruimtes;
+
     if (this.isView) {
 
       this.ruimtesSet.sort(function(a, b){return a.plattegrondCoördinaat - b.plattegrondCoördinaat});
@@ -43,10 +50,9 @@ export class PlattegrondComponent implements OnInit {
     }
   }
 
-  onClick(ruimte) {
-    this.componentService.changeRuimte(ruimte);
-  }
-  toggleView() {
+
+
+/*  toggleView() {
     this.isView = !this.isView;
 
     if (this.isView) {
@@ -66,7 +72,7 @@ reserveer(ruimte) {
     ruimte.eindDatumReservatie = Date.now();
     console.log(ruimte.eindDatumReservatie);
     console.log(ruimte);
-}
+}*/
 
 
 

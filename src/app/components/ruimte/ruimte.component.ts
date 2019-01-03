@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {ComponentService} from '../../services/component.service';
 
 @Component({
@@ -7,15 +8,33 @@ import {ComponentService} from '../../services/component.service';
   styleUrls: ['./ruimte.component.css']
 })
 export class RuimteComponent implements OnInit {
+  selectedOption: number;
+  @Input() ruimte;
 
-  ruimte: string;
+  isCollapsed : boolean = true;
 
-  constructor(private data: ComponentService) { }
+  constructor(private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
 
-  ngOnInit() {
-    this.data.currentRuimte.subscribe(ruimte => this.ruimte = ruimte);
   }
 
+  ngOnInit() {
 
+  }
 
+  reserveer() {
+    let eindDatum = new Date();
+    eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
+    this.ruimte.gereserveerd = true;
+    this.ruimte.eindDatumReservatie = eindDatum;
+    console.log(eindDatum.toLocaleString());
+
+  }
+
+  onClick() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  infoClick(){
+    this.componentService.changeRuimte(this.ruimte);
+  }
 }

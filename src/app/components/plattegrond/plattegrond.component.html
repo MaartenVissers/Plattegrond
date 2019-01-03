@@ -5,13 +5,7 @@
 <!--OPMERKING: Hier gewoon de wrapper weglaten voor de tabellayout-->
 
 <div class="{{cssClass}}">
-  <div *ngFor="let ruimte of ruimtesSet;" (click)="onClick(ruimte)" [ngStyle]="{background: {true:'red',false:''}[ruimte.bezet]}"  id="{{ruimte.cssId}}">
-    <p>{{ruimte.name}}</p>
 
-  <p class="fa fa-video"*ngIf="ruimte.beamer=='true'"></p>
-    <!--info circle-->
-    <p style="display:flex; justify-content:flex-end; align-content: flex-end;"*ngIf="ruimte.capaciteit">{{ruimte.capaciteit}} <span class="fa fa-male"></span></p>
-    <p style="display:flex; justify-content:flex-end; align-content: flex-end;"*ngIf="ruimte.drukte >= 0">{{ruimte.drukte}} <span class="fa fa-child"></span></p>
-    <button (click)="reserveer(ruimte)">reserveer</button>
-  </div>
+ <app-ruimte id="{{ruimte.cssId}}" [ngStyle]="{background: {true:'red',false:''}[ruimte.bezet]}" *ngFor="let ruimte of ruimtesSet"
+                    [ruimte]="ruimte"></app-ruimte>
 </div>
