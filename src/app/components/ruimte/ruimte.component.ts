@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ComponentService} from '../../services/component.service';
 import {SettingsService} from '../../services/settings.service';
@@ -15,8 +15,6 @@ export class RuimteComponent implements OnInit {
   @Input() ruimte;
   settings: Settings;
   geselecteerdeRuimte: string;
-
-  isCollapsed : boolean = true;
 
   constructor(private settingsService: SettingsService, private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
 
@@ -40,12 +38,17 @@ export class RuimteComponent implements OnInit {
   onClick() {
     this.componentService.changeRuimte(this.ruimte);
     this.componentService.currentRuimte.subscribe(ruimte => this.geselecteerdeRuimte = ruimte);
-    this.isCollapsed = !this.isCollapsed;
-  }
-
-  infoClick(){
-    console.log(this.ruimte);
-    this.componentService.changeRuimte(this.ruimte);
+    setTimeout(this.test, 5000, this.componentService);
 
   }
+
+  test(componentService) {
+    componentService.changeRuimte('');
+  }
+
+  /*@HostListener('window:resize', ['$event'])
+  onResize(event) {
+    console.log(event);
+  }
+*/
 }
