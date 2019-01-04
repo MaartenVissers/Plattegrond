@@ -1,6 +1,6 @@
 /*OPMERKING: niet echt behorende tot het model*/
 
-export interface Ruimte {
+export class Ruimte {
   id: string;
   name: string;
   plattegrondCoördinaat: number;

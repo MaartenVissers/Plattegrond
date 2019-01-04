@@ -2,7 +2,7 @@
 
 import {Ruimte} from './ruimte';
 
-export interface Verdieping {
+export class Verdieping {
   id: string;
   name: string;
   ruimtes: Ruimte[];

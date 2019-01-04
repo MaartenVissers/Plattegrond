@@ -44,14 +44,16 @@ const routes: Routes = [
     SettingspaneelComponent
   ],
   imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false },
+    ),
     RouterModule.forRoot(
       routes,
       { enableTracing: false }
     ),
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

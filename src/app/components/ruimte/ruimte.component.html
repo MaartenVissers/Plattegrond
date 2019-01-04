@@ -1,4 +1,4 @@
-<div (click)="onClick()">
+<div>
   <p *ngIf="settings.name">{{ruimte.name}}</p>
 
   <div *ngIf="ruimte.type!='gang'">
@@ -36,7 +36,7 @@
         Gereserveerd tot {{ruimte.eindDatumReservatie.toLocaleString()}}
       </div>
 
-      <a [routerLink]="['ruimtedetails/', ruimte.id]" class="fa fa-info-circle">
+      <a (click)="onInfoClick()" [routerLink]="['ruimtedetails/', ruimte.id]" class="fa fa-info-circle">
 
 
       </a>

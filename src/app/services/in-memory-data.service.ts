@@ -8,7 +8,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const verdiepingen = [
       {
-        'id': 'eersteVerdieping',
+        'id': 0,
         'name': 'Eerste Verdieping',
         'ruimtes': [{
           'id': 'refterVd1',
@@ -152,7 +152,7 @@ export class InMemoryDataService implements InMemoryDbService {
             'bezet': false
           }]
       }, {
-        'id': 'tweedeVerdieping',
+        'id': 1,
         'name': 'Tweede Verdieping',
         'ruimtes': [{
           'id': 'theview',
@@ -296,7 +296,7 @@ export class InMemoryDataService implements InMemoryDbService {
             'bezet': false
           }]
       }, {
-        'id': 'derdeVerdieping',
+        'id': 2,
         'name': 'Derde Verdieping',
         'ruimtes': [{
           'id': 'vergaderzaal',
@@ -441,6 +441,28 @@ export class InMemoryDataService implements InMemoryDbService {
           }]
       }
     ];
-    return {verdiepingen};
+
+    const ruimtes= [{'id': 'refterVd1',
+      'plattegrondCoördinaat': 1,
+      'name': 'REFTER',
+      'cssId': 'boven',
+      'type': 'Cafetaria',
+      'capaciteit': 100,
+      'beamer': false,
+      'drukte': '0'
+    },
+      {
+        'id': 'GR101',
+        'name': 'GR101',
+        'plattegrondCoördinaat': 2,
+        'type': 'klaslokaal',
+        'capaciteit': 30,
+        'beamer': true,
+        'bezet': false
+      }]
+
+    return {verdiepingen, ruimtes};
   }
+
+
 }

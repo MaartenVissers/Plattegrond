@@ -12,6 +12,7 @@
     <label for="capaciteit"><b>Capaciteit: </b></label>
     <input id="capaciteit" value="{{ruimte.capaciteit}}">
   </div>
+  <input type="submit" value="submit" (click)="submit(ruimte)">
 </form>
 <p *ngIf="ruimte.beamer"><b>Beamer:</b> ja</p>
 <p *ngIf="!ruimte.beamer"><b>Beamer:</b> nee</p>

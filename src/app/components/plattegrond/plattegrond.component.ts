@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
-import { DataService} from '../../services/data.service';
+import {DataService} from '../../services/data.service';
 import {Ruimte} from '../../model/ruimte';
 import {ComponentService} from '../../services/component.service';
 import {Verdieping} from '../../model/verdieping';
@@ -20,21 +20,40 @@ export class PlattegrondComponent implements OnInit {
   toggleButtonText: string;
   verdieping: Verdieping;
   settings: Settings;
+  geselecteerdeRuimte: Ruimte;
+  timeout;
 
   constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService, private settingsService: SettingsService) {
     this.cssClass = 'wrapper';
     this.isView = true;
     this.toggleButtonText = 'Lijst Weergave';
+    //this.timeout = window.setTimeout(function(){}, 1000);
+    console.log(this.timeout);
 
-     }
+  }
 
   ngOnInit() {
     this.dataService.getVerdiepingen().subscribe(
       (verdiepingen) => {
         this.verdiepingSet = verdiepingen;
-        this.ruimtesSet = verdiepingen[0].ruimtes;
+
       }
     );
+
+    this.dataService.getVerdieping(0).subscribe(verdieping => {
+        this.verdieping = verdieping;
+      }
+    );
+
+    this.dataService.getRuimtes(0).subscribe(rs => {
+      this.ruimtesSet = rs;
+      console.log(rs);
+      console.log("ruimtes:" + this.ruimtesSet);
+      console.log(this.ruimtesSet);
+    });
+
+
+
 
     this.settingsService.currentSettings.subscribe(settings => this.settings = settings);
   }
@@ -43,42 +62,54 @@ export class PlattegrondComponent implements OnInit {
     console.log(verdieping);
     this.ruimteService.changeVerdieping(verdieping);
     this.verdieping = verdieping;
-      this.ruimtesSet = verdieping.ruimtes;
+    this.ruimtesSet = verdieping.ruimtes;
 
     if (this.isView) {
 
-      this.ruimtesSet.sort(function(a, b){return a.plattegrondCoördinaat - b.plattegrondCoördinaat});
+      this.ruimtesSet.sort(function (a, b) {
+        return a.plattegrondCoördinaat - b.plattegrondCoördinaat;
+      });
     } else {
-      this.ruimtesSet.sort(function(a, b){return a.id.localeCompare(b.id)});
+      this.ruimtesSet.sort(function (a, b) {
+        return a.id.localeCompare(b.id);
+      });
 
     }
   }
 
+  onClick(ruimte) {
+    clearTimeout(this.timeout);
+    this.componentService.changeRuimte(ruimte);
+    this.componentService.currentRuimte.subscribe(r => this.geselecteerdeRuimte = r);
+    this.timeout = window.setTimeout(this.test, 5000, this.componentService);
+  }
+
+  test(componentService) {
+    componentService.changeRuimte('');
+  }
 
 
-/*  toggleView() {
-    this.isView = !this.isView;
+  /*  toggleView() {
+      this.isView = !this.isView;
 
-    if (this.isView) {
-      this.cssClass = 'wrapper';
-      this.toggleButtonText = 'Lijst Weergave';
-      this.ruimtesSet.sort(function(a, b){return a.plattegrondCoördinaat - b.plattegrondCoördinaat});
-    } else {
-      this.toggleButtonText = 'Plattegrond Weergave';
-      this.cssClass = 'list';
-      this.ruimtesSet.sort(function(a, b){return a.id.localeCompare(b.id)});
+      if (this.isView) {
+        this.cssClass = 'wrapper';
+        this.toggleButtonText = 'Lijst Weergave';
+        this.ruimtesSet.sort(function(a, b){return a.plattegrondCoördinaat - b.plattegrondCoördinaat});
+      } else {
+        this.toggleButtonText = 'Plattegrond Weergave';
+        this.cssClass = 'list';
+        this.ruimtesSet.sort(function(a, b){return a.id.localeCompare(b.id)});
 
-    }
-}
+      }
+  }
 
-reserveer(ruimte) {
-    ruimte.gereserveerd = true;
-    ruimte.eindDatumReservatie = Date.now();
-    console.log(ruimte.eindDatumReservatie);
-    console.log(ruimte);
-}*/
-
-
+  reserveer(ruimte) {
+      ruimte.gereserveerd = true;
+      ruimte.eindDatumReservatie = Date.now();
+      console.log(ruimte.eindDatumReservatie);
+      console.log(ruimte);
+  }*/
 
 
 }

@@ -14,7 +14,8 @@ export class RuimteComponent implements OnInit {
   selectedOption: number;
   @Input() ruimte;
   settings: Settings;
-  geselecteerdeRuimte: string;
+  @Input() geselecteerdeRuimte: string;
+  @Input() timeout;
 
   constructor(private settingsService: SettingsService, private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
 
@@ -26,25 +27,21 @@ export class RuimteComponent implements OnInit {
   }
 
   reserveer() {
-    let eindDatum = new Date();
-    eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
-    this.ruimte.bezet = true;
-    this.ruimte.gereserveerd = true;
-    this.ruimte.eindDatumReservatie = eindDatum;
-    console.log(eindDatum.toLocaleString());
-
+    const eindDatum = new Date();
+    if (this.selectedOption) {
+      eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
+      this.ruimte.bezet = true;
+      this.ruimte.gereserveerd = true;
+      this.ruimte.eindDatumReservatie = eindDatum;
+      console.log(eindDatum.toLocaleString());
+    }
   }
 
-  onClick() {
-    this.componentService.changeRuimte(this.ruimte);
-    this.componentService.currentRuimte.subscribe(ruimte => this.geselecteerdeRuimte = ruimte);
-    setTimeout(this.test, 5000, this.componentService);
-
+  onInfoClick() {
+    clearTimeout(this.timeout);
   }
 
-  test(componentService) {
-    componentService.changeRuimte('');
-  }
+
 
   /*@HostListener('window:resize', ['$event'])
   onResize(event) {
