@@ -4,6 +4,7 @@ import {ComponentService} from '../../services/component.service';
 import {SettingsService} from '../../services/settings.service';
 import {Settings} from '../../model/settings';
 import {Ruimte} from '../../model/ruimte';
+import { DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-ruimte',
@@ -17,7 +18,7 @@ export class RuimteComponent implements OnInit {
   @Input() geselecteerdeRuimte: string;
   @Input() timeout;
 
-  constructor(private settingsService: SettingsService, private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private settingsService: SettingsService, private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -29,11 +30,11 @@ export class RuimteComponent implements OnInit {
   reserveer() {
     const eindDatum = new Date();
     if (this.selectedOption) {
+      this.ruimte.startDatumReservatie = new Date();
       eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
-      this.ruimte.bezet = true;
       this.ruimte.gereserveerd = true;
       this.ruimte.eindDatumReservatie = eindDatum;
-      console.log(eindDatum.toLocaleString());
+      this.dataService.updateRuimte(this.ruimte).subscribe();
     }
   }
 

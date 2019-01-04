@@ -16,7 +16,7 @@
 
       <input *ngIf="(ruimte.drukte  >= 0)" type="range" name="drukte" id="drukteSlider" [(ngModel)]="ruimte.drukte"
              min="0"
-             max="100"/>
+             max="{{ruimte.capaciteit}}"/>
       <br>
 
       <div
@@ -34,6 +34,10 @@
 
       <div *ngIf="ruimte.gereserveerd">
         Gereserveerd tot {{ruimte.eindDatumReservatie.toLocaleString()}}
+      </div>
+      <div *ngIf="ruimte.bezet">
+        <br>
+        bezet
       </div>
 
       <a (click)="onInfoClick()" [routerLink]="['ruimtedetails/', ruimte.id]" class="fa fa-info-circle">

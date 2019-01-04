@@ -14,7 +14,20 @@ import { AppRoutingModule} from './app-routing.module';
 import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails.component';
 import {RouterModule, Routes} from '@angular/router';
 import { SettingspaneelComponent } from './components/settingspaneel/settingspaneel.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatButtonModule, MatButtonToggleModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRippleModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatOptionModule,
+  MatSelectModule
+} from '@angular/material';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +49,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  exports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatOptionModule,
+    MatSelectModule
+  ],
   declarations: [
     AppComponent,
     PlattegrondComponent,
@@ -54,6 +78,17 @@ const routes: Routes = [
       routes,
       { enableTracing: false }
     ),
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

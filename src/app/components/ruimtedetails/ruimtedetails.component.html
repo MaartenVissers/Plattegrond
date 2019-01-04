@@ -1,25 +1,66 @@
 <h1>{{ruimte.name}}</h1>
-<form>
-  <div>
-    <label for="name"><b>name: </b></label>
-    <input id="name" [(ngModel)]="ruimte.name"  name="name">
-  </div>
-  <div>
-    <label for="type"><b>Type: </b></label>
-    <input id="type" [(ngModel)]="ruimte.type"  name="ruimte.type">
-  </div>
-  <div>
-    <label for="capaciteit"><b>Capaciteit: </b></label>
-    <input id="capaciteit" value="{{ruimte.capaciteit}}">
-  </div>
-  <input type="submit" value="submit" (click)="submit(ruimte)">
-</form>
-<p *ngIf="ruimte.beamer"><b>Beamer:</b> ja</p>
-<p *ngIf="!ruimte.beamer"><b>Beamer:</b> nee</p>
-<p *ngIf="ruimte.bezet"><b>Bezet:</b> <span style="color:red"> ja</span></p>
-<p *ngIf="!ruimte.bezet"><b>Bezet:</b> <span style="color:green"> nee</span></p>
-<p *ngIf="ruimte.drukte"><b>Drukte:</b> {{ruimte.drukte}}</p>
-<p *ngIf="ruimte.gereserveerd"><b>Gereserveerd tot:</b> {{ruimte.eindDatumReservatie.toLocaleString()}}</p>
+<form [formGroup]="myForm">
+  <br>
 
-<a routerLink=""><button>TERUG NAAR HET OVERZICHT</button></a>
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name" [(ngModel)]="ruimte.name" name="name">
+    <mat-error *ngIf="name.invalid && name.touched">Ingegeven naam is fout.</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Type" formControlName="type" [(ngModel)]="ruimte.type" name="type">
+    <mat-error *ngIf="type.invalid && type.touched">Ingegeven type is fout.</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Capaciteit" formControlName="capaciteit" [(ngModel)]="ruimte.capaciteit"
+           name="capaciteit">
+    <mat-error *ngIf="capaciteit.invalid && capaciteit.touched">Ingegeven capaciteit is fout.</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="ruimte.beamer">Beamer aanwezig</mat-slide-toggle>
+  <div *ngIf="ruimte.bezet!=null">
+    <br>
+    <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="ruimte.bezet">Ruimte bezet</mat-slide-toggle>
+  </div>
+
+  <div *ngIf="ruimte.drukte!=null">
+    <br>
+    <mat-slider thumbLabel min="0" max="{{ruimte.capaciteit}}" [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="ruimte.drukte">Drukte
+    </mat-slider>
+
+
+  </div>
+
+
+  <div *ngIf="ruimte.gereserveerd">
+    <br>
+    <section class="mat-typography">
+      <p><b>Gereserveerd vanaf: </b> {{ruimte.startDatumReservatie.toLocaleString()}}</p>
+      <p><b>Gereserveerd tot: </b> {{ruimte.eindDatumReservatie.toLocaleString()}}</p>
+    </section>
+
+
+  </div>
+  <!--<div *ngIf="!ruimte.gereserveerd">
+    <br>
+    <h4>Reserveer</h4>
+    <mat-form-field>
+      <mat-select formControlName="reserveer" [(ngModel)]="selectedOption" placeholder="Aantal uur">
+        <mat-option value="1">1 uur</mat-option>
+        <mat-option value="2">2 uur</mat-option>
+        <mat-option value="3">3 uur</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button (click)="reserveer()"mat-button [disabled]="!selectedOption">Reserveer</button>
+
+
+  </div>-->
+  <br>
+  <br>
+  <button mat-button [disabled]="myForm.invalid" (click)="submit(ruimte)">SUBMIT</button>
+
+</form>
 

@@ -27,7 +27,6 @@ export class PlattegrondComponent implements OnInit {
     this.cssClass = 'wrapper';
     this.isView = true;
     this.toggleButtonText = 'Lijst Weergave';
-    //this.timeout = window.setTimeout(function(){}, 1000);
     console.log(this.timeout);
 
   }
@@ -40,17 +39,15 @@ export class PlattegrondComponent implements OnInit {
       }
     );
 
-    this.dataService.getVerdieping(0).subscribe(verdieping => {
+    this.dataService.getVerdieping(1).subscribe(verdieping => {
         this.verdieping = verdieping;
       }
     );
 
-    this.dataService.getRuimtes(0).subscribe(rs => {
-      this.ruimtesSet = rs;
-      console.log(rs);
-      console.log("ruimtes:" + this.ruimtesSet);
-      console.log(this.ruimtesSet);
+    this.dataService.getRuimtes().subscribe(rs => {
+      this.ruimtesSet = rs.filter(r => r.verdieping === 1);
     });
+
 
 
 
@@ -62,7 +59,9 @@ export class PlattegrondComponent implements OnInit {
     console.log(verdieping);
     this.ruimteService.changeVerdieping(verdieping);
     this.verdieping = verdieping;
-    this.ruimtesSet = verdieping.ruimtes;
+    this.dataService.getRuimtes().subscribe(rs => {
+      this.ruimtesSet = rs.filter(r => r.verdieping === verdieping.id);
+    });
 
     if (this.isView) {
 
@@ -89,7 +88,7 @@ export class PlattegrondComponent implements OnInit {
   }
 
 
-  /*  toggleView() {
+  toggleView() {
       this.isView = !this.isView;
 
       if (this.isView) {
@@ -103,13 +102,5 @@ export class PlattegrondComponent implements OnInit {
 
       }
   }
-
-  reserveer(ruimte) {
-      ruimte.gereserveerd = true;
-      ruimte.eindDatumReservatie = Date.now();
-      console.log(ruimte.eindDatumReservatie);
-      console.log(ruimte);
-  }*/
-
 
 }

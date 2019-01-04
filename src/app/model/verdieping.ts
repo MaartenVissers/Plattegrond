@@ -5,5 +5,4 @@ import {Ruimte} from './ruimte';
 export class Verdieping {
   id: string;
   name: string;
-  ruimtes: Ruimte[];
 }

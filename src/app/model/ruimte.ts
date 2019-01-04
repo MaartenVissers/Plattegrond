@@ -11,6 +11,9 @@ export class Ruimte {
   bezet: boolean;
   drukte: number;
   gereserveerd: boolean;
+  startDatumReservatie: Date;
   eindDatumReservatie: Date;
+  verdieping: number;
+  campus: number;
 
 }

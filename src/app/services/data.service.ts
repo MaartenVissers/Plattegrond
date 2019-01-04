@@ -21,10 +21,9 @@ export class DataService {
   public getVerdiepingen(): Observable<Verdieping[]> {
     return this.http.get<Verdieping[]>(this.verdiepingenUrl);
   }
-
- /* public getRuimtes(): Observable<Ruimte[]> {
+  public getRuimtes(): Observable<Ruimte[]> {
     return this.http.get<Ruimte[]>(this.ruimtesUrl);
-  }*/
+  }
 
   updateRuimte (ruimte: Ruimte): Observable<any> {
     return this.http.put(this.ruimtesUrl, ruimte, this.httpOptions).pipe(
@@ -47,13 +46,7 @@ export class DataService {
     };
   }
 
-  getRuimtes(id: number): Observable<Ruimte[]> {
-    const url = `${this.verdiepingenUrl}/${id}/ruimtes`;
-    return this.http.get<Ruimte[]>(url).pipe(
-      tap(_ => console.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Ruimte[]>(`getHero id=${id}`))
-    );
-  }
+
 
   getVerdieping(id: number): Observable<Verdieping> {
     const url = `${this.verdiepingenUrl}/${id}`;

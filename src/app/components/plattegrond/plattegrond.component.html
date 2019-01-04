@@ -6,6 +6,6 @@
 
 <div class="{{cssClass}}">
 
- <app-ruimte (click)=onClick(ruimte) id="{{ruimte.cssId}}" [ngStyle]="{background: {true:'red',false:''}[ruimte.bezet && settings.bezet]}" *ngFor="let ruimte of ruimtesSet"
+ <app-ruimte (click)=onClick(ruimte) id="{{ruimte.cssId}}" [ngStyle]="{background: {true:'red',false:''}[(ruimte.bezet && settings.bezet)||(ruimte.gereserveerd && settings.bezet)]}" *ngFor="let ruimte of ruimtesSet"
                     [ruimte]="ruimte" [geselecteerdeRuimte]="geselecteerdeRuimte" [timeout]="timeout"></app-ruimte>
 </div>

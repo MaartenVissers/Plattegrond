@@ -5,6 +5,7 @@ import {Ruimte} from '../../model/ruimte';
 
 import{DataService} from '../../services/data.service';
 import {Verdieping} from '../../model/verdieping';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -14,27 +15,71 @@ import {Verdieping} from '../../model/verdieping';
 })
 export class RuimtedetailsComponent implements OnInit {
   ruimte: Ruimte;
+  myForm: FormGroup;
+  selectedOption: number;
 
   ngOnInit(): void {
     this.componentService.currentRuimte.subscribe(ruimte => this.ruimte = ruimte);
+
+    this.myForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.pattern('[A-Z0-9]*')
+
+      ]],
+      type: ['', [
+        Validators.required,
+        Validators.pattern("klaslokaal|aula|vergaderzaal|cafetaria|bureau|Klaslokaal|Aula|Vergaderzaal|Cafetaria|Bureau")
+      ]],
+      capaciteit: ['', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(200)
+      ]],
+      beamer : '',
+      bezet: '',
+      drukte: '',
+      reserveer: ''
+    })
+
+    // @ts-ignore
+    this.myForm.valueChanges.subscribe(this.dataService.updateRuimte(this.ruimte).subscribe());
   }
 
-  constructor(private componentService: ComponentService, private dataService: DataService, private location: Location){
+  constructor(private fb: FormBuilder, private componentService: ComponentService, private dataService: DataService, private location: Location){
 
   }
 
   submit(ruimte) {
     this.dataService.updateRuimte(this.ruimte)
       .subscribe(() => this.goBack());
-    this.dataService.getVerdiepingen().subscribe(verdiepingen => console.log(verdiepingen));
-    /*this.dataService.getRuimtes().subscribe(r => console.log(r));
-    console.log("de heroes: " + this.verdiepingen);*/
-
-
   }
+
+  /*reserveer() {
+    const eindDatum = new Date();
+    if (this.selectedOption) {
+      this.ruimte.startDatumReservatie = new Date();
+      eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
+      this.ruimte.gereserveerd = true;
+      this.ruimte.eindDatumReservatie = eindDatum;
+      this.dataService.updateRuimte(this.ruimte).subscribe();
+    }
+  }*/
 
   goBack(): void {
     this.location.back();
+  }
+
+  get name() {
+    return this.myForm.get('name');
+  }
+
+  get capaciteit() {
+    return this.myForm.get('capaciteit');
+  }
+
+  get type() {
+    return this.myForm.get('type');
   }
 
 
