@@ -40,24 +40,10 @@
       <p><b>Gereserveerd vanaf: </b> {{ruimte.startDatumReservatie.toLocaleString()}}</p>
       <p><b>Gereserveerd tot: </b> {{ruimte.eindDatumReservatie.toLocaleString()}}</p>
     </section>
-
+    <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="veranderReservatie()" [(ngModel)]="ruimte.gereserveerd">Annuleer reservatie</mat-slide-toggle>
 
   </div>
-  <!--<div *ngIf="!ruimte.gereserveerd">
-    <br>
-    <h4>Reserveer</h4>
-    <mat-form-field>
-      <mat-select formControlName="reserveer" [(ngModel)]="selectedOption" placeholder="Aantal uur">
-        <mat-option value="1">1 uur</mat-option>
-        <mat-option value="2">2 uur</mat-option>
-        <mat-option value="3">3 uur</mat-option>
-      </mat-select>
-    </mat-form-field>
 
-    <button (click)="reserveer()"mat-button [disabled]="!selectedOption">Reserveer</button>
-
-
-  </div>-->
   <br>
   <br>
   <button mat-button [disabled]="myForm.invalid" (click)="submit(ruimte)">SUBMIT</button>

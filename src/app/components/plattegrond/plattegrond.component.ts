@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, HostListener} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Ruimte} from '../../model/ruimte';
 import {ComponentService} from '../../services/component.service';
@@ -12,30 +12,36 @@ import {SettingsService} from '../../services/settings.service';
   templateUrl: './plattegrond.component.html',
   styleUrls: ['./plattegrond.component.css']
 })
-export class PlattegrondComponent implements OnInit {
+export class PlattegrondComponent implements OnInit, AfterViewInit {
   ruimtesSet: Ruimte[];
   verdiepingSet: Verdieping[];
   cssClass: string;
-  isView: boolean;
+  isPlattegrondView: boolean;
   toggleButtonText: string;
   verdieping: Verdieping;
   settings: Settings;
   geselecteerdeRuimte: Ruimte;
   timeout;
+  gereserveerdeRuimtes: Ruimte[];
 
   constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService, private settingsService: SettingsService) {
     this.cssClass = 'wrapper';
-    this.isView = true;
+    this.isPlattegrondView = true;
     this.toggleButtonText = 'Lijst Weergave';
-    console.log(this.timeout);
 
+  }
+
+  ngAfterViewInit(): void {
+    console.log('constructor');
+    this.gereserveerdeRuimtes = [];
+    // Demo: zet interval naar 1000
+    setInterval(this.checkGereserveerdeRuimtes, 60000, this.gereserveerdeRuimtes);
   }
 
   ngOnInit() {
     this.dataService.getVerdiepingen().subscribe(
       (verdiepingen) => {
         this.verdiepingSet = verdiepingen;
-
       }
     );
 
@@ -46,11 +52,13 @@ export class PlattegrondComponent implements OnInit {
 
     this.dataService.getRuimtes().subscribe(rs => {
       this.ruimtesSet = rs.filter(r => r.verdieping === 1);
+      if (window.innerWidth <= 700) {
+        this.veranderVolgorde(false);
+      } else {
+        this.veranderVolgorde(this.isPlattegrondView);
+      }
+
     });
-
-
-
-
 
     this.settingsService.currentSettings.subscribe(settings => this.settings = settings);
   }
@@ -61,19 +69,15 @@ export class PlattegrondComponent implements OnInit {
     this.verdieping = verdieping;
     this.dataService.getRuimtes().subscribe(rs => {
       this.ruimtesSet = rs.filter(r => r.verdieping === verdieping.id);
+      if (window.innerWidth <= 700) {
+        this.veranderVolgorde(false);
+      } else {
+        this.veranderVolgorde(this.isPlattegrondView);
+      }
     });
 
-    if (this.isView) {
 
-      this.ruimtesSet.sort(function (a, b) {
-        return a.plattegrondCoördinaat - b.plattegrondCoördinaat;
-      });
-    } else {
-      this.ruimtesSet.sort(function (a, b) {
-        return a.id.localeCompare(b.id);
-      });
 
-    }
   }
 
   onClick(ruimte) {
@@ -89,18 +93,49 @@ export class PlattegrondComponent implements OnInit {
 
 
   toggleView() {
-      this.isView = !this.isView;
+    this.isPlattegrondView = !this.isPlattegrondView;
 
-      if (this.isView) {
-        this.cssClass = 'wrapper';
-        this.toggleButtonText = 'Lijst Weergave';
-        this.ruimtesSet.sort(function(a, b){return a.plattegrondCoördinaat - b.plattegrondCoördinaat});
-      } else {
-        this.toggleButtonText = 'Plattegrond Weergave';
-        this.cssClass = 'list';
-        this.ruimtesSet.sort(function(a, b){return a.id.localeCompare(b.id)});
+    this.veranderVolgorde(this.isPlattegrondView);
+  }
 
-      }
+  checkGereserveerdeRuimtes(gereserveerdeRuimtes) {
+    if (gereserveerdeRuimtes.length > 0) {
+      gereserveerdeRuimtes.forEach(function (gereserveerdeRuimte, index, object) {
+        const nu = new Date();
+        if (gereserveerdeRuimte.eindDatumReservatie < nu) {
+          gereserveerdeRuimte.startDatumReservatie = null;
+          gereserveerdeRuimte.eindDatumReservatie = null;
+          gereserveerdeRuimte.gereserveerd = false;
+          object.splice(index, 1);
+        }
+      });
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.innerWidth <= 700) {
+      this.veranderVolgorde(false);
+    } else {
+      this.veranderVolgorde(this.isPlattegrondView);
+    }
+  }
+
+  veranderVolgorde(selectedView) {
+    if (selectedView) {
+      this.cssClass = 'wrapper';
+      this.toggleButtonText = 'Lijst Weergave';
+      this.ruimtesSet.sort(function (a, b) {
+        return a.plattegrondCoördinaat - b.plattegrondCoördinaat;
+      });
+    } else {
+      this.toggleButtonText = 'Plattegrond Weergave';
+      this.cssClass = 'list';
+      this.ruimtesSet.sort(function (a, b) {
+        return a.id.localeCompare(b.id);
+      });
+    }
+
   }
 
 }

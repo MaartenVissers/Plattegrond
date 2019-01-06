@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, OnInit} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { DataService } from './services/data.service';
@@ -88,7 +89,8 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSliderModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    CommonModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

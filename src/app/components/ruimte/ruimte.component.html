@@ -1,10 +1,16 @@
-<div>
-  <p *ngIf="settings.name">{{ruimte.name}}</p>
+<div [ngStyle]="{'background-color': backgroundColor}" style="height:100%;padding:0" >
+  <p style="margin:0" *ngIf="settings.name">{{ruimte.name}}</p>
 
   <div *ngIf="ruimte.type!='gang'">
+
+    <p class="fa fa-chalkboard-teacher" *ngIf="ruimte.type.toLowerCase()==='klaslokaal' && settings.type"></p>
+    <p class="fa fa-book-reader" *ngIf="ruimte.type.toLowerCase()==='aula' && settings.type"></p>
+    <p class="fa fa-utensils" *ngIf="ruimte.type.toLowerCase()==='cafetaria' && settings.type"></p>
+    <p class="fa fa-lightbulb" *ngIf="ruimte.type.toLowerCase()==='vergaderzaal' && settings.type"></p>
+    <p class="fa fa-graduation-cap" *ngIf="ruimte.type.toLowerCase()==='studielandschap' && settings.type"></p>
+    <p class="fa fa-chair-office" *ngIf="ruimte.type.toLowerCase()==='bureau' && settings.type"></p>
+    <br>
     <p class="fa fa-video" *ngIf="ruimte.beamer && settings.beamer"></p>
-
-
 
     <p style="display:flex; justify-content:flex-end; align-content: flex-end;"
        *ngIf="settings.bezet && ruimte.drukte >= 0">{{ruimte.drukte}} <span class="fa fa-child"></span></p>
@@ -14,7 +20,7 @@
 
     <div *ngIf="(ruimte === geselecteerdeRuimte)">
 
-      <input *ngIf="(ruimte.drukte  >= 0)" type="range" name="drukte" id="drukteSlider" [(ngModel)]="ruimte.drukte"
+      <input (change)="veranderBackground()" *ngIf="(ruimte.drukte  >= 0)" type="range" name="drukte" id="drukteSlider" [(ngModel)]="ruimte.drukte"
              min="0"
              max="{{ruimte.capaciteit}}"/>
       <br>

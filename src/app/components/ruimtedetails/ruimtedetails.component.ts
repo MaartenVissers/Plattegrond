@@ -16,7 +16,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class RuimtedetailsComponent implements OnInit {
   ruimte: Ruimte;
   myForm: FormGroup;
-  selectedOption: number;
 
   ngOnInit(): void {
     this.componentService.currentRuimte.subscribe(ruimte => this.ruimte = ruimte);
@@ -24,12 +23,12 @@ export class RuimtedetailsComponent implements OnInit {
     this.myForm = this.fb.group({
       name: ['', [
         Validators.required,
-        Validators.pattern('[A-Z0-9]*')
+        Validators.pattern('[a-zA-Z0-9\\s]*')
 
       ]],
       type: ['', [
         Validators.required,
-        Validators.pattern("klaslokaal|aula|vergaderzaal|cafetaria|bureau|Klaslokaal|Aula|Vergaderzaal|Cafetaria|Bureau")
+        Validators.pattern("klaslokaal|aula|vergaderzaal|cafetaria|bureau|studielandschap|Studielandschap|Klaslokaal|Aula|Vergaderzaal|Cafetaria|Bureau")
       ]],
       capaciteit: ['', [
         Validators.required,
@@ -63,7 +62,7 @@ export class RuimtedetailsComponent implements OnInit {
       this.ruimte.gereserveerd = true;
       this.ruimte.eindDatumReservatie = eindDatum;
       this.dataService.updateRuimte(this.ruimte).subscribe();
-    }
+    }c
   }*/
 
   goBack(): void {
@@ -82,6 +81,14 @@ export class RuimtedetailsComponent implements OnInit {
     return this.myForm.get('type');
   }
 
+  veranderReservatie(){
+    if(!this.ruimte.gereserveerd){
+      this.ruimte.eindDatumReservatie = null;
+      this.ruimte.startDatumReservatie = null;
+      console.log(this.ruimte);
+    }
+    console.log(this.ruimte);
+  }
 
 
 
