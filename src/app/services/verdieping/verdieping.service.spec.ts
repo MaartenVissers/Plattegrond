@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ComponentService } from './component.service';
+import { VerdiepingService } from './verdieping.service';
 
-describe('ComponentService', () => {
+describe('VerdiepingService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ComponentService = TestBed.get(ComponentService);
+    const service: VerdiepingService = TestBed.get(VerdiepingService);
     expect(service).toBeTruthy();
   });
 });

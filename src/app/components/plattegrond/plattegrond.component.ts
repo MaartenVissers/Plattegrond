@@ -1,11 +1,11 @@
 import {Component, OnInit, AfterViewInit, HostListener} from '@angular/core';
-import {DataService} from '../../services/data.service';
+import {DataService} from '../../services/data/data.service';
 import {Ruimte} from '../../model/ruimte';
-import {ComponentService} from '../../services/component.service';
 import {Verdieping} from '../../model/verdieping';
-import {RuimteService} from '../../services/ruimte.service';
 import {Settings} from '../../model/settings';
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../services/settings/settings.service';
+import {VerdiepingService} from '../../services/verdieping/verdieping.service';
+import {RuimteService} from '../../services/ruimte/ruimte.service';
 
 @Component({
   selector: 'app-plattegrond',
@@ -24,7 +24,7 @@ export class PlattegrondComponent implements OnInit, AfterViewInit {
   timeout;
   gereserveerdeRuimtes: Ruimte[];
 
-  constructor(private dataService: DataService, private componentService: ComponentService, private ruimteService: RuimteService, private settingsService: SettingsService) {
+  constructor(private dataService: DataService, private ruimteService: RuimteService, private verdiepingService: VerdiepingService, private settingsService: SettingsService) {
     this.cssClass = 'wrapper';
     this.isPlattegrondView = true;
     this.toggleButtonText = 'Lijst Weergave';
@@ -32,7 +32,6 @@ export class PlattegrondComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('constructor');
     this.gereserveerdeRuimtes = [];
     // Demo: zet interval naar 1000
     setInterval(this.checkGereserveerdeRuimtes, 60000, this.gereserveerdeRuimtes);
@@ -64,8 +63,7 @@ export class PlattegrondComponent implements OnInit, AfterViewInit {
   }
 
   setVerdieping(verdieping) {
-    console.log(verdieping);
-    this.ruimteService.changeVerdieping(verdieping);
+    this.verdiepingService.changeVerdieping(verdieping);
     this.verdieping = verdieping;
     this.dataService.getRuimtes().subscribe(rs => {
       this.ruimtesSet = rs.filter(r => r.verdieping === verdieping.id);
@@ -82,13 +80,13 @@ export class PlattegrondComponent implements OnInit, AfterViewInit {
 
   onClick(ruimte) {
     clearTimeout(this.timeout);
-    this.componentService.changeRuimte(ruimte);
-    this.componentService.currentRuimte.subscribe(r => this.geselecteerdeRuimte = r);
-    this.timeout = window.setTimeout(this.test, 5000, this.componentService);
+    this.ruimteService.changeRuimte(ruimte);
+    this.ruimteService.currentRuimte.subscribe(r => this.geselecteerdeRuimte = r);
+    this.timeout = window.setTimeout(this.resetRuimte, 5000, this.ruimteService);
   }
 
-  test(componentService) {
-    componentService.changeRuimte('');
+  resetRuimte(ruimteService) {
+    ruimteService.changeRuimte('');
   }
 
 

@@ -1,5 +1,3 @@
-/*OPMERKING: niet echt behorende tot het model*/
-
 export class Ruimte {
   id: string;
   name: string;

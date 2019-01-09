@@ -4,14 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { DataService } from './services/data.service';
+import { DataService } from './services/data/data.service';
 import { PlattegrondComponent } from './components/plattegrond/plattegrond.component';
 
-import { InMemoryDataService } from './services/in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { RuimteComponent } from './components/ruimte/ruimte.component';
 import {FormsModule} from '@angular/forms';
-import { AppRoutingModule} from './app-routing.module';
 import { RuimtedetailsComponent } from './components/ruimtedetails/ruimtedetails.component';
 import {RouterModule, Routes} from '@angular/router';
 import { SettingspaneelComponent } from './components/settingspaneel/settingspaneel.component';

@@ -18,7 +18,8 @@
     <mat-error *ngIf="capaciteit.invalid && capaciteit.touched">Ingegeven capaciteit is fout.</mat-error>
   </mat-form-field>
   <br>
-  <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="ruimte.beamer">Beamer aanwezig</mat-slide-toggle>
+    <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="ruimte.beamer">Beamer aanwezig
+    </mat-slide-toggle>
   <div *ngIf="ruimte.bezet!=null">
     <br>
     <mat-slide-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="ruimte.bezet">Ruimte bezet</mat-slide-toggle>
@@ -40,7 +41,9 @@
       <p><b>Gereserveerd vanaf: </b> {{ruimte.startDatumReservatie.toLocaleString()}}</p>
       <p><b>Gereserveerd tot: </b> {{ruimte.eindDatumReservatie.toLocaleString()}}</p>
     </section>
-    <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="veranderReservatie()" [(ngModel)]="ruimte.gereserveerd">Annuleer reservatie</mat-slide-toggle>
+    <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="veranderReservatie()"
+                      [(ngModel)]="ruimte.gereserveerd">Annuleer reservatie
+    </mat-slide-toggle>
 
   </div>
 

@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SettingsService} from '../../services/settings.service';
+import {Component} from '@angular/core';
+import {SettingsService} from '../../services/settings/settings.service';
 import {Settings} from '../../model/settings';
 
 @Component({
@@ -24,7 +24,7 @@ export class SettingspaneelComponent {
   }
 
   getSettings(): Settings {
-    let localStorageItem = JSON.parse(localStorage.getItem('settings'));
+    const localStorageItem = JSON.parse(localStorage.getItem('settings'));
     return localStorageItem == null ? new Settings() : localStorageItem.settings;
   }
 

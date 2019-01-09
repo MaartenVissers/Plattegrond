@@ -2,10 +2,8 @@
 <button id="toggleButton" (click)="toggleView()">{{toggleButtonText}}</button>
 
 <button *ngFor="let verdieping of verdiepingSet" (click)="setVerdieping(verdieping)">{{verdieping.name}}</button>
-<!--OPMERKING: Hier gewoon de wrapper weglaten voor de tabellayout-->
 
 <div class="{{cssClass}}">
-  <!--[ngStyle]="{background: {true: 'red'}[(ruimte.bezet && settings.bezet)], color: {true: 'blue'}[(ruimte.gereserveerd && settings.bezet) ]}"-->
  <app-ruimte style="padding:0" (click)=onClick(ruimte) id="{{ruimte.cssId}}" [ngStyle]="{color: {true: 'blue'}[(ruimte.gereserveerd && settings.bezet) ]}"
              *ngFor="let ruimte of ruimtesSet"
                     [ruimte]="ruimte" [geselecteerdeRuimte]="geselecteerdeRuimte" [gereserveerdeRuimtes]="gereserveerdeRuimtes" [timeout]="timeout"></app-ruimte>

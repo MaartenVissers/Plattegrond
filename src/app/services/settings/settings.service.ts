@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Settings} from '../model/settings';
+import {Settings} from '../../model/settings';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,6 @@ export class SettingsService {
   currentSettings = this.settingsSource.asObservable();
 
   constructor() {
-    this.settings.name = true;
-    this.settings.type = true;
-    this.settings.capaciteit = false;
-    this.settings.beamer = false;
-    this.settings.bezet = true;
-    this.settings.drukte = true;
   }
 
   changeSettings(settings: Settings) {

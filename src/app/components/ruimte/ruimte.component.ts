@@ -1,10 +1,8 @@
-import {Component, AfterViewInit, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {ComponentService} from '../../services/component.service';
-import {SettingsService} from '../../services/settings.service';
+import {SettingsService} from '../../services/settings/settings.service';
 import {Settings} from '../../model/settings';
-import {Ruimte} from '../../model/ruimte';
-import {DataService} from '../../services/data.service';
+import {DataService} from '../../services/data/data.service';
 
 @Component({
   selector: 'app-ruimte',
@@ -20,7 +18,7 @@ export class RuimteComponent implements OnInit {
   @Input() gereserveerdeRuimtes;
   backgroundColor;
 
-  constructor(private dataService: DataService, private settingsService: SettingsService, private componentService: ComponentService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private settingsService: SettingsService, private router: Router, private route: ActivatedRoute) {
   }
 
 
@@ -46,9 +44,6 @@ export class RuimteComponent implements OnInit {
       this.ruimte.eindDatumReservatie = eindDatum;
       this.gereserveerdeRuimtes.push(this.ruimte);
       this.dataService.updateRuimte(this.ruimte).subscribe();
-
-
-      console.log('B: ' + this.gereserveerdeRuimtes);
     }
   }
 
@@ -57,11 +52,8 @@ export class RuimteComponent implements OnInit {
   }
 
   veranderBackground() {
-    //const h = (this.ruimte.drukte / this.ruimte.capaciteit) * 210 + 150;
     const h = (1 - (this.ruimte.drukte / this.ruimte.capaciteit)) * 120;
     this.backgroundColor = 'hsl(' + h + ', 60%, 50%)';
-    console.log((this.ruimte.drukte / this.ruimte.capaciteit) * 210 + 150);
-    console.log(this.backgroundColor);
     this.dataService.updateRuimte(this.ruimte).subscribe();
 
 

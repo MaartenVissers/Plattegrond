@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComponentService} from '../../services/component.service';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {Ruimte} from '../../model/ruimte';
 
-import{DataService} from '../../services/data.service';
-import {Verdieping} from '../../model/verdieping';
+import {DataService} from '../../services/data/data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RuimteService} from '../../services/ruimte/ruimte.service';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class RuimtedetailsComponent implements OnInit {
   myForm: FormGroup;
 
   ngOnInit(): void {
-    this.componentService.currentRuimte.subscribe(ruimte => this.ruimte = ruimte);
+    this.ruimteService.currentRuimte.subscribe(ruimte => this.ruimte = ruimte);
 
     this.myForm = this.fb.group({
       name: ['', [
@@ -28,24 +27,24 @@ export class RuimtedetailsComponent implements OnInit {
       ]],
       type: ['', [
         Validators.required,
-        Validators.pattern("klaslokaal|aula|vergaderzaal|cafetaria|bureau|studielandschap|Studielandschap|Klaslokaal|Aula|Vergaderzaal|Cafetaria|Bureau")
+        Validators.pattern('klaslokaal|aula|vergaderzaal|cafetaria|bureau|studielandschap|Studielandschap|Klaslokaal|Aula|Vergaderzaal|Cafetaria|Bureau')
       ]],
       capaciteit: ['', [
         Validators.required,
         Validators.min(0),
         Validators.max(200)
       ]],
-      beamer : '',
+      beamer: '',
       bezet: '',
       drukte: '',
       reserveer: ''
-    })
+    });
 
     // @ts-ignore
     this.myForm.valueChanges.subscribe(this.dataService.updateRuimte(this.ruimte).subscribe());
   }
 
-  constructor(private fb: FormBuilder, private componentService: ComponentService, private dataService: DataService, private location: Location){
+  constructor(private fb: FormBuilder, private ruimteService: RuimteService, private dataService: DataService, private location: Location) {
 
   }
 
@@ -53,17 +52,6 @@ export class RuimtedetailsComponent implements OnInit {
     this.dataService.updateRuimte(this.ruimte)
       .subscribe(() => this.goBack());
   }
-
-  /*reserveer() {
-    const eindDatum = new Date();
-    if (this.selectedOption) {
-      this.ruimte.startDatumReservatie = new Date();
-      eindDatum.setHours(eindDatum.getHours() + Number(this.selectedOption));
-      this.ruimte.gereserveerd = true;
-      this.ruimte.eindDatumReservatie = eindDatum;
-      this.dataService.updateRuimte(this.ruimte).subscribe();
-    }c
-  }*/
 
   goBack(): void {
     this.location.back();
@@ -81,15 +69,12 @@ export class RuimtedetailsComponent implements OnInit {
     return this.myForm.get('type');
   }
 
-  veranderReservatie(){
-    if(!this.ruimte.gereserveerd){
+  veranderReservatie() {
+    if (!this.ruimte.gereserveerd) {
       this.ruimte.eindDatumReservatie = null;
       this.ruimte.startDatumReservatie = null;
-      console.log(this.ruimte);
     }
-    console.log(this.ruimte);
   }
-
 
 
 }

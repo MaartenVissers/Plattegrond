@@ -4,9 +4,11 @@ export class Settings {
   capaciteit: boolean;
   beamer: boolean;
   bezet: boolean;
-  drukte: boolean;
 
-  constructor(){
+  constructor() {
+    this.name = true;
+    this.type = true;
+    this.bezet = true;
 
   }
 }

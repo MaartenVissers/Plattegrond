@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { DataService} from './services/data.service';
-import {ComponentService} from './services/component.service';
 import {PlattegrondComponent} from './components/plattegrond/plattegrond.component';
 
 
@@ -14,12 +12,10 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService, private componentService: ComponentService, private plattegrondComponent: PlattegrondComponent) {
+  constructor() {
 
   }
 
-  setVerdieping(verdieping) {
-  }
 
 
   ngOnInit() {

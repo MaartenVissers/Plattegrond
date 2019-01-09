@@ -231,8 +231,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'campus': 0
       },
       {
-        'id': 'GR212',
-        'name': 'GR212',
+        'id': 'GR210',
+        'name': 'GR210',
         'plattegrondCoördinaat': 6,
         'type': 'klaslokaal',
         'capaciteit': 30,
@@ -242,54 +242,10 @@ export class InMemoryDataService implements InMemoryDbService {
         'campus': 0
       },
       {
-        'id': 'GR202',
-        'name': 'GR202',
+        'id': 'bureauvd1',
+        'name': 'Bureau',
         'plattegrondCoördinaat': 7,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 2,
-        'campus': 0
-      },
-      {
-        'id': 'GR211',
-        'name': 'GR211',
-        'plattegrondCoördinaat': 8,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 2,
-        'campus': 0
-      },
-      {
-        'id': 'GR203',
-        'name': 'GR203',
-        'plattegrondCoördinaat': 9,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': false,
-        'bezet': true,
-        'verdieping': 2,
-        'campus': 0
-      },
-      {
-        'id': 'GR210',
-        'name': 'GR210',
-        'plattegrondCoördinaat': 10,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 2,
-        'campus': 0
-      },
-      {
-        'id': 'GR204',
-        'name': 'GR204',
-        'plattegrondCoördinaat': 11,
-        'type': 'klaslokaal',
+        'type': 'Bureau',
         'capaciteit': 30,
         'beamer': true,
         'bezet': false,
@@ -299,29 +255,29 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         'id': 'GR209',
         'name': 'GR209',
-        'plattegrondCoördinaat': 12,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': true,
-        'verdieping': 2,
-        'campus': 0
-      },
-      {
-        'id': 'GR205',
-        'name': 'GR205',
-        'plattegrondCoördinaat': 13,
+        'plattegrondCoördinaat': 8,
         'type': 'klaslokaal',
         'capaciteit': 30,
         'beamer': true,
         'bezet': false,
+        'verdieping': 2,
+        'campus': 0
+      },
+      {
+        'id': 'vergaderzaalvd1',
+        'name': 'Vergaderzaal',
+        'plattegrondCoördinaat': 9,
+        'type': 'vergaderzaal',
+        'capaciteit': 30,
+        'beamer': false,
+        'bezet': true,
         'verdieping': 2,
         'campus': 0
       },
       {
         'id': 'GR208',
         'name': 'GR208',
-        'plattegrondCoördinaat': 14,
+        'plattegrondCoördinaat': 10,
         'type': 'klaslokaal',
         'capaciteit': 30,
         'beamer': true,
@@ -330,10 +286,9 @@ export class InMemoryDataService implements InMemoryDbService {
         'campus': 0
       },
       {
-        'id': 'GR206',
-        'name': 'GR206',
-        'plattegrondCoördinaat': 15,
-        'cssId': 'linksOnderLokaal',
+        'id': 'GR202',
+        'name': 'GR202',
+        'plattegrondCoördinaat': 11,
         'type': 'klaslokaal',
         'capaciteit': 30,
         'beamer': true,
@@ -344,6 +299,51 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         'id': 'GR207',
         'name': 'GR207',
+        'plattegrondCoördinaat': 12,
+        'type': 'klaslokaal',
+        'capaciteit': 30,
+        'beamer': true,
+        'bezet': true,
+        'verdieping': 2,
+        'campus': 0
+      },
+      {
+        'id': 'GR203',
+        'name': 'GR203',
+        'plattegrondCoördinaat': 13,
+        'type': 'klaslokaal',
+        'capaciteit': 30,
+        'beamer': true,
+        'bezet': false,
+        'verdieping': 2,
+        'campus': 0
+      },
+      {
+        'id': 'GR206',
+        'name': 'GR206',
+        'plattegrondCoördinaat': 14,
+        'type': 'klaslokaal',
+        'capaciteit': 30,
+        'beamer': true,
+        'bezet': false,
+        'verdieping': 2,
+        'campus': 0
+      },
+      {
+        'id': 'GR204',
+        'name': 'GR204',
+        'plattegrondCoördinaat': 15,
+        'cssId': 'linksOnderLokaal',
+        'type': 'klaslokaal',
+        'capaciteit': 30,
+        'beamer': true,
+        'bezet': false,
+        'verdieping': 2,
+        'campus': 0
+      },
+      {
+        'id': 'GR205',
+        'name': 'GR205',
         'plattegrondCoördinaat': 16,
         'cssId': 'rechtsOnderLokaal',
         'type': 'klaslokaal',
@@ -352,180 +352,7 @@ export class InMemoryDataService implements InMemoryDbService {
         'bezet': false,
         'verdieping': 2,
         'campus': 0
-      }/*,
-      {
-        'id': 'vergaderzaal',
-        'name': 'VERGADERZAAL',
-        'plattegrondCoördinaat': 1,
-        'cssId': 'boven',
-        'type': 'vergaderzaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR301',
-        'name': 'GR301',
-        'plattegrondCoördinaat': 2,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': true,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'gangVd3Links',
-        'name': 'GANG',
-        'plattegrondCoördinaat': 3,
-        'cssId': 'linkseGang',
-        'type': 'gang',
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'middenVd3',
-        'name': 'MIDDEN',
-        'plattegrondCoördinaat': 4,
-        'cssId': 'midden',
-        'type': 'gang',
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'gangVd3Rechts',
-        'name': 'GANG',
-        'plattegrondCoördinaat': 5,
-        'cssId': 'rechtseGang',
-        'type': 'gang',
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR312',
-        'name': 'GR312',
-        'plattegrondCoördinaat': 6,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR302',
-        'name': 'GR302',
-        'plattegrondCoördinaat': 7,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR311',
-        'name': 'GR311',
-        'plattegrondCoördinaat': 8,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR303',
-        'name': 'GR303',
-        'plattegrondCoördinaat': 9,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR310',
-        'name': 'GR310',
-        'plattegrondCoördinaat': 10,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR304',
-        'name': 'GR304',
-        'plattegrondCoördinaat': 11,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR309',
-        'name': 'GR309',
-        'plattegrondCoördinaat': 12,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR305',
-        'name': 'GR305',
-        'plattegrondCoördinaat': 13,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR308',
-        'name': 'GR308',
-        'plattegrondCoördinaat': 14,
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR306',
-        'name': 'GR306',
-        'plattegrondCoördinaat': 15,
-        'cssId': 'linksOnderLokaal',
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': true,
-        'bezet': false,
-        'verdieping': 3,
-        'campus': 0
-      },
-      {
-        'id': 'GR307',
-        'name': 'GR307',
-        'plattegrondCoördinaat': 16,
-        'cssId': 'rechtsOnderLokaal',
-        'type': 'klaslokaal',
-        'capaciteit': 30,
-        'beamer': false,
-        'bezet': true,
-        'verdieping': 3,
-        'campus': 0
-      }*/
+      }
     ];
 
     const verdiepingen = [
@@ -537,10 +364,7 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 2,
         'name':  'Tweede Verdieping'
       },
-      /*{
-        'id': 3,
-        'name':  'Derde Verdieping'
-      }*/
+
 
     ];
 

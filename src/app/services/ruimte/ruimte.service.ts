@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Ruimte} from '../model/ruimte';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Ruimte} from '../../model/ruimte';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ComponentService {
-
-
+export class RuimteService {
 
   private ruimtesSource = new BehaviorSubject(new Ruimte());
   currentRuimte = this.ruimtesSource.asObservable();
@@ -21,8 +18,4 @@ export class ComponentService {
   changeRuimte(ruimte: Ruimte) {
     this.ruimtesSource.next(ruimte);
   }
-
-
-
-
 }
