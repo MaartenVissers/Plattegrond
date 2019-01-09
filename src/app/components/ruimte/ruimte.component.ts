@@ -58,10 +58,12 @@ export class RuimteComponent implements OnInit {
 
   veranderBackground() {
     //const h = (this.ruimte.drukte / this.ruimte.capaciteit) * 210 + 150;
-    const h = (1- (this.ruimte.drukte / this.ruimte.capaciteit)) * 120;
+    const h = (1 - (this.ruimte.drukte / this.ruimte.capaciteit)) * 120;
     this.backgroundColor = 'hsl(' + h + ', 60%, 50%)';
     console.log((this.ruimte.drukte / this.ruimte.capaciteit) * 210 + 150);
     console.log(this.backgroundColor);
     this.dataService.updateRuimte(this.ruimte).subscribe();
+
+
   }
 }
